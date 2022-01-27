@@ -21,3 +21,6 @@ class Polynomial:
                 for d, c in enumerate(coefs[2:], start=2) if c]
 
         return ' + '.join(reversed(terms)) or '0'
+
+    def __repr__(self):
+        return type(self).__name__ + '(' + repr(self.coefficients) + ')'
