@@ -24,3 +24,8 @@ class Polynomial:
 
     def __repr__(self):
         return type(self).__name__ + '(' + repr(self.coefficients) + ')'
+
+    def __eq__(self, other):
+
+        return self.coefficients == other.coefficients
+        # works as the coeffients are tuples so can be compared directly
