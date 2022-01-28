@@ -1,3 +1,5 @@
+from numbers import Number
+
 class Polynomial:
     def __init__(self, coefs):
 
@@ -29,3 +31,22 @@ class Polynomial:
 
         return self.coefficients == other.coefficients
         # works as the coeffients are tuples so can be compared directly
+
+    def __add__(self, other):
+        
+        if isinstance(other, Polynomial):
+            common = min(self.degree(), other.degree()) + 1
+            coefs = tuple(a + b for a, b in zip(self.coefficients, other.coefficients))
+            coefs += self.coefficients[common:] + other.coefficients[common:]
+
+            return Polynomial(coefs)
+        
+        elif isinstance(other, Number):
+            return Polynomial((self.coefficients[0] + other,)
+            + self.coefficients[1:])
+
+        else:
+            return NotImplemented
+
+    def __radd__(self, other):
+        return self + other
